@@ -150,6 +150,23 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedUri, (string)$uriWithNewPort);
     }
 
+    /**
+     * @dataProvider defaultSchemeAndPortWithExpectedAuthorityProvider
+     */
+    public function testDefaultPortNotReturnedViaGetAuthority($uriString, $expectedAuthority)
+    {
+        $uri = new Uri($uriString);
+        $this->assertSame($expectedAuthority, $uri->getAuthority());
+    }
+
+    public function defaultSchemeAndPortWithExpectedAuthorityProvider()
+    {
+        return [
+            ['http://test.example.com:80', 'test.example.com'],
+            ['https://test.example.com:443', 'test.example.com']
+        ];
+    }
+
     // User Info
 
     public function testCanSetAndGetUserInfo()

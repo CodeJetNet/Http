@@ -43,6 +43,14 @@ class Uri implements UriInterface
     private $fragment = '';
 
     /**
+     * @var int[] Default Ports for known Schemes.
+     */
+    private $defaultSchemePorts = [
+        'http' => 80,
+        'https' => 443,
+    ];
+
+    /**
      * @param string|array $uri
      * @throws InvalidArgumentException on non-string $uri argument
      */
@@ -131,11 +139,30 @@ class Uri implements UriInterface
             $authority = $this->getUserInfo() . '@' . $authority;
         }
 
-        if ($this->hasPort()) {
+        if (!$this->isDefaultPort()) {
             $authority .= ':' . $this->getPort();
         }
 
         return $authority;
+    }
+
+    private function isDefaultPort()
+    {
+        if (!$this->hasPort()) {
+            return true;
+        }
+
+        if (!$this->hasScheme()) {
+            return false;
+        }
+
+        if (isset($this->defaultSchemePorts[$this->getScheme()])
+            && $this->defaultSchemePorts[$this->getScheme()] == $this->getPort()
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     public function getUserInfo()

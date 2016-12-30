@@ -78,6 +78,13 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedUri, (string)$newUri);
     }
 
+    public function testHostNormalizedToLowercase()
+    {
+        $uri = new Uri('http://TEST.EXAMPLE.COM');
+        $this->assertSame('test.example.com', $uri->getHost());
+        $this->assertSame('http://test.example.com', (string)$uri);
+    }
+
     // Scheme
 
     public function testCanSetAndGetScheme()

@@ -190,7 +190,7 @@ class Uri implements UriInterface
 
     public function getHost()
     {
-        return $this->host;
+        return strtolower($this->host);
     }
 
     public function hasPort()

@@ -111,6 +111,12 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedUri, (string)$uriWithScheme);
     }
 
+    public function testSchemeNormalizedToLowerCase()
+    {
+        $uri = (new Uri())->withScheme('HTTP');
+        $this->assertSame('http', $uri->getScheme());
+    }
+
     // Port
 
     public function testCanSetAndGetPort()

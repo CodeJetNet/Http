@@ -116,7 +116,7 @@ class Uri implements UriInterface
 
     public function getScheme()
     {
-        return $this->scheme;
+        return strtolower($this->scheme);
     }
 
     public function getAuthority()

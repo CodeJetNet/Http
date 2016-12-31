@@ -174,6 +174,12 @@ class UriTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    public function testDefaultPortsReturnNull()
+    {
+        $uri = new Uri('http://test.example.com:80');
+        $this->assertNull($uri->getPort());
+    }
+
     // User Info
 
     public function testCanSetAndGetUserInfo()

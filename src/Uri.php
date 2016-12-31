@@ -146,25 +146,6 @@ class Uri implements UriInterface
         return $authority;
     }
 
-    private function isDefaultPort()
-    {
-        if (!$this->hasPort()) {
-            return true;
-        }
-
-        if (!$this->hasScheme()) {
-            return false;
-        }
-
-        if (isset($this->defaultSchemePorts[$this->getScheme()])
-            && $this->defaultSchemePorts[$this->getScheme()] == $this->getPort()
-        ) {
-            return true;
-        }
-
-        return false;
-    }
-
     public function getUserInfo()
     {
         return $this->userInfo;
@@ -204,7 +185,30 @@ class Uri implements UriInterface
 
     public function getPort()
     {
+        if ($this->isDefaultPort()) {
+            return null;
+        }
+
         return $this->port;
+    }
+
+    private function isDefaultPort()
+    {
+        if (!$this->hasPort()) {
+            return true;
+        }
+
+        if (!$this->hasScheme()) {
+            return false;
+        }
+
+        if (isset($this->defaultSchemePorts[$this->getScheme()])
+            && $this->defaultSchemePorts[$this->getScheme()] == $this->port
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     public function hasPath()

@@ -78,6 +78,13 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedUri, (string)$newUri);
     }
 
+    public function testHostNormalizedToLowercase()
+    {
+        $uri = new Uri('http://TEST.EXAMPLE.COM');
+        $this->assertSame('test.example.com', $uri->getHost());
+        $this->assertSame('http://test.example.com', (string)$uri);
+    }
+
     // Scheme
 
     public function testCanSetAndGetScheme()
@@ -111,6 +118,12 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedUri, (string)$uriWithScheme);
     }
 
+    public function testSchemeNormalizedToLowerCase()
+    {
+        $uri = (new Uri())->withScheme('HTTP');
+        $this->assertSame('http', $uri->getScheme());
+    }
+
     // Port
 
     public function testCanSetAndGetPort()
@@ -142,6 +155,29 @@ class UriTest extends \PHPUnit_Framework_TestCase
 
         $expectedUri = str_ireplace(self::PORT, $newPort, self::URI_STRING);
         $this->assertSame($expectedUri, (string)$uriWithNewPort);
+    }
+
+    /**
+     * @dataProvider defaultSchemeAndPortWithExpectedAuthorityProvider
+     */
+    public function testDefaultPortNotReturnedViaGetAuthority($uriString, $expectedAuthority)
+    {
+        $uri = new Uri($uriString);
+        $this->assertSame($expectedAuthority, $uri->getAuthority());
+    }
+
+    public function defaultSchemeAndPortWithExpectedAuthorityProvider()
+    {
+        return [
+            ['http://test.example.com:80', 'test.example.com'],
+            ['https://test.example.com:443', 'test.example.com']
+        ];
+    }
+
+    public function testDefaultPortsReturnNull()
+    {
+        $uri = new Uri('http://test.example.com:80');
+        $this->assertNull($uri->getPort());
     }
 
     // User Info

@@ -27,6 +27,14 @@ $uri = new CodeJet\Uri('https://www.example.com');
 echo $uri;
 ```
 
+### Request
+Creating a request using the PSR7 RequestInterface methods.
+``` php
+$request = (new CodeJet\Http\Request())->withMethod('POST')->withUri($uri);
+echo $uri;
+```
+
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

@@ -21,9 +21,19 @@ $ composer require codejet/http
 
 ## Usage
 
-### URI
+### Uri
+
+Using the Uri class itself.
+
 ``` php
-$uri = new CodeJet\Uri('https://www.example.com');
+$uri = new CodeJet\Http\Uri('https://www.example.com');
+echo $uri;
+```
+
+Or, using the [http-interop proposed factory](https://github.com/http-interop/http-factory).
+
+``` php
+$uri = new CodeJet\Http\Factory\UriFactory('https://www.example.com');
 echo $uri;
 ```
 

@@ -44,6 +44,33 @@ $request = (new CodeJet\Http\Request())->withMethod('POST')->withUri($uri);
 echo $uri;
 ```
 
+### Stream
+
+Using the class constructor.
+
+``` php
+$handle = fopen('php://input','r');
+$stream = new CodeJet\Http\Stream($handle);
+```
+
+Or, using the [http-interop proposed StreamFactory](https://github.com/http-interop/http-factory).
+
+From a string:
+``` php
+$string = "I love lamp.";
+$stream = (new CodeJet\Http\Factory\StreamFactory())->createStream($string);
+```
+
+From a file:
+``` php
+$stream = (new CodeJet\Http\Factory\StreamFactory())->createStreamFromFile('php://input', 'r');
+```
+
+From a resource handle:
+``` php
+$handle = fopen('php://input','r');
+$stream = (new CodeJet\Http\Factory\StreamFactory())->createStreamFromResource($handle);
+```
 
 ## Change log
 

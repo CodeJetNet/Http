@@ -33,7 +33,7 @@
     <php>
         <!-- Fully qualified class names to your classes -->
         <const name="REQUEST_FACTORY" value="CodeJet\Http\Factory\RequestFactory"/>
-        <!--<const name="RESPONSE_FACTORY" value="Acme\Factory\ResponseFactory"/>-->
+        <const name="RESPONSE_FACTORY" value="CodeJet\Http\Factory\ResponseFactory"/>
         <!--<const name="SERVER_REQUEST_FACTORY" value="Acme\Factory\ServerRequestFactory"/>-->
         <const name="STREAM_FACTORY" value="CodeJet\Http\Factory\StreamFactory"/>
         <!--<const name="UPLOADED_FILE_FACTORY" value="Acme\Factory\UploadedFileFactory"/>-->

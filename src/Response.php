@@ -51,11 +51,11 @@ class Response extends Message implements ResponseInterface
      */
     public function withStatus($code, $reasonPhrase = '')
     {
-        if(!is_int($code) || strlen($code) > 3) {
+        if (!is_int($code) || strlen($code) > 3) {
             throw new \InvalidArgumentException('Status code must be a 3 digit integer.');
         }
 
-        if(!is_string($reasonPhrase)) {
+        if (!is_string($reasonPhrase)) {
             throw new \InvalidArgumentException('Reason phrase must be a string.');
         }
 

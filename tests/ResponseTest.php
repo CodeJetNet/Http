@@ -10,7 +10,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
     {
         $response = new Response();
 
-        $this->assertSame(200,$response->getStatusCode());
+        $this->assertSame(200, $response->getStatusCode());
     }
 
     public function testGetEmptyReasonPhraseWhenNoneIsSet()
